@@ -5,6 +5,11 @@ In this activity, you'll build a compatibility-based "FriendFinder" application 
 
 You will use Express to handle routing. Make sure you deploy your app to Heroku so other users can fill it out.
 
+
+# link to app
+
+[friendFinder](https://gentle-cove-20963.herokuapp.com/)
+
 # Home Page 
 ![Home](images/Home_Page.png)
 
