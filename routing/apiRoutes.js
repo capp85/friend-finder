@@ -23,23 +23,23 @@ module.exports = function(app) {
 
 	// Take's the result of the user's survey POST and parse it
 	var userData = req.body;
-	var userScores = userData.scores;
-	// To take the results of the user's name and photo, other than the survey questions, to post and parse it
-	//var userName = userData.name;
-	//var userPhoto = userData.pic;
+	var userScores = userData["scores[]"];
+	//console.log(userData);
 
 	// The variable used to calculate the difference b/n the user's scores and the scores of each user
 	var totalDifference = 0;
 
 	//looping through the friends array of objects to get each friends score
 	for (var i = 0; i < friends.length - 1; i++) {
-			console.log(friends[i].name);
+			//console.log(friends[i].name);
 			totalDifference = 0;
 
 			//looping through friends score and users score then calculating the difference between the two and pushes that to the "total difference" variable listed above
 
 			for (var j = 0; j < 10; j++) {
 					// calculates the difference between the scores and sums them into the totalDifference
+				//	console.log(totalDifference, userScores[j], friends[i].name + "hey")
+
 					totalDifference += Math.abs(parseInt(userScores[j]) - parseInt(friends[i].scores[j]));
 					// If the differences is less then the differences of the current "best match"
 					if (totalDifference <= bestMatch.friendDifference) {
