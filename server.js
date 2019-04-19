@@ -1,22 +1,24 @@
-const express = require("express");
+var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
 
-const path = require('path');
+var app = express();
+var PORT = process.env.PORT || 8080;
 
-const app = express ();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(express.static(path.join(__dirname, 'public')));
 
+require('./routing/apiRoutes')(app);
+require('./routing/htmlRoutes')(app);
 
-app.use(express.urlencoded({extended:true}));
-app.use(express.json());
-
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, 'survey.html'));
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'public'));
 });
 
-//app.post("/api/survey", (req,res) => {
-  //  const formValues = req.body;
-    //res.json(formValues);
-//});
 
-const PORT = process.env.PORT || 8889;
-app.listen(PORT, () => console.log("hey im connected"));
-
+app.listen(PORT, function () {
+  console.log('Listening on port: ' + PORT);
+});
